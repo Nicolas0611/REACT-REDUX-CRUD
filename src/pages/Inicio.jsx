@@ -3,11 +3,15 @@ import Cliente from "../components/Cliente";
 import { useRestStore } from "../hooks/useRestStore";
 
 const Inicio = () => {
-  const { users, startGettingUsers } = useRestStore();
+  const { users, confirmation, confirmationGetter, startGettingUsers } =
+    useRestStore();
 
   useEffect(() => {
-    startGettingUsers();
-  }, []);
+    if (users.length === 0 || confirmation === true) {
+      startGettingUsers();
+      confirmationGetter(false);
+    }
+  }, [confirmation]);
 
   return (
     <div>

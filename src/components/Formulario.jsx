@@ -7,7 +7,8 @@ import { useRestStore } from "../hooks/useRestStore";
 
 const Formulario = ({ cliente }) => {
   const navigate = useNavigate();
-  const { createNewUser } = useRestStore();
+  const { createNewUser, clearUser, updateUsers } = useRestStore();
+
   const nuevoClienteSchema = Yup.object().shape({
     nombre: Yup.string()
       .min(3, "El Nombre es muy corto")
@@ -25,6 +26,15 @@ const Formulario = ({ cliente }) => {
       .integer("Numero no valido")
       .typeError("El numero no es valido"),
   });
+  const onSubmitView = (values) => {
+    if (cliente?.nombre) {
+      console.log(cliente.id);
+      console.log(values);
+      updateUsers(cliente.id, values);
+    } else {
+      createNewUser(values);
+    }
+  };
 
   return (
     <div className="bg-white mt-10 px-5 py-10 rounded-md shadow-md md:w-3/4 mx-auto">
@@ -34,17 +44,16 @@ const Formulario = ({ cliente }) => {
 
       <Formik
         initialValues={{
-          nombre: "Nicolas",
-          empresa: "Nico",
-          email: "nico.sierra@hotmail.com",
-          telefono: "5455546",
-          notas: "soy el mejor",
+          nombre: cliente?.nombre ?? "Nicolas",
+          empresa: cliente?.empresa ?? "Nico S.A.S",
+          email: cliente?.email ?? "nico.sierra@hotmail.com",
+          telefono: cliente?.telefono ?? "12346546",
+          notas: cliente?.telefono ?? "",
         }}
         onSubmit={(values) => {
-          createNewUser(values);
+          onSubmitView(values);
         }}
         enableReinitialize={true}
-        validationSchema={nuevoClienteSchema}
       >
         {() => {
           return (
@@ -122,6 +131,16 @@ const Formulario = ({ cliente }) => {
               <input
                 type="submit"
                 className="mt-5 w-full bg-blue-800 p-3 text-white uppercase font-bold text-lg"
+                value={cliente?.nombre ? "Editar Cliente" : "Nuevo Cliente"}
+              />
+              <input
+                type="submit"
+                className="mt-5 w-full bg-red-800 p-3 text-white uppercase font-bold text-lg"
+                value="Atras"
+                onClick={() => {
+                  clearUser();
+                  navigate(`/clientes`);
+                }}
               />
             </Form>
           );

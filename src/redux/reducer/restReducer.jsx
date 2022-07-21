@@ -3,12 +3,15 @@ import {
   CLEAN_USERS,
   GET_USERS,
   GET_USERS_ID,
+  CONFIRM_STATE,
+  DELETE_USER,
 } from "../types/restTypes";
 
 const initialState = {
   darkMode: false,
   users: [],
   singleUser: [],
+  confirmState: false,
 };
 
 export const restAPI = (state = initialState, action) => {
@@ -32,6 +35,16 @@ export const restAPI = (state = initialState, action) => {
       return {
         ...state,
         singleUser: [],
+      };
+    case CONFIRM_STATE:
+      return {
+        ...state,
+        confirmState: action.payload,
+      };
+    case DELETE_USER:
+      return {
+        ...state,
+        users: action.payload,
       };
 
     default:

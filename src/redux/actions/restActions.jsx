@@ -1,5 +1,11 @@
 import axios from "axios";
-import { GET_USERS, GET_USERS_ID, CLEAN_USERS } from "../types/restTypes";
+import {
+  GET_USERS,
+  GET_USERS_ID,
+  CLEAN_USERS,
+  CONFIRM_STATE,
+  DELETE_USER,
+} from "../types/restTypes";
 
 export const getUsers = (type, id) => {
   return async (dispatch) => {
@@ -34,17 +40,27 @@ export const postUser = (user) => {
     let url = "https://api-generator.retool.com/guD0XI/data";
     try {
       await axios.post(url, user);
-      console.log(response);
     } catch (error) {
       console.log(error);
     }
   };
 };
+
 export const deleteUser = (id) => {
   return async () => {
     let url = `https://api-generator.retool.com/guD0XI/data/${id}`;
     try {
       await axios.delete(url);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+export const updateUser = (id, user) => {
+  return async () => {
+    let url = `https://api-generator.retool.com/guD0XI/data/${id}`;
+    try {
+      await axios.put(url, user);
     } catch (error) {
       console.log(error);
     }
@@ -59,6 +75,7 @@ export const getUserData = (user) => {
     });
   };
 };
+
 export const getUserDataById = (id) => {
   return (dispatch) => {
     dispatch({
@@ -67,10 +84,29 @@ export const getUserDataById = (id) => {
     });
   };
 };
+
 export const clearUsers = () => {
   return (dispatch) => {
     dispatch({
       type: CLEAN_USERS,
+    });
+  };
+};
+
+export const confirmState = (state) => {
+  return (dispatch) => {
+    dispatch({
+      type: CONFIRM_STATE,
+      payload: state,
+    });
+  };
+};
+export const deleteUserList = (users, id) => {
+  return (dispatch) => {
+    let arrayUsers = users.filter((user) => user.id !== id);
+    dispatch({
+      type: DELETE_USER,
+      payload: arrayUsers,
     });
   };
 };
