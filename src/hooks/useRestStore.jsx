@@ -38,6 +38,7 @@ export const useRestStore = () => {
   //DELETE A NEW USER W/ POST
   const updateUsers = (id, user) => {
     dispatch(updateUser(id, user));
+    dispatch(confirmState(true));
   };
 
   //CLEAR USER BY ID
