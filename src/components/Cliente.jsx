@@ -10,6 +10,7 @@ const Cliente = ({ id, nombre, email, telefono, empresa }) => {
     await startGettingUsersId(id);
     navigate(`/clientes/${id}`);
   };
+
   return (
     <tr className="border-b hover:bg-gray-50">
       <td className="p-3"> {nombre}</td>
@@ -42,6 +43,10 @@ const Cliente = ({ id, nombre, email, telefono, empresa }) => {
         <button
           type="button"
           className="bg-blue-600 hover:bg-blue-700 block w-full text-white p-2 uppercase font-bold text-xs mt-3"
+          onClick={() => {
+            startGettingUsersId(id);
+            navigate(`/clientes/editar/${id}`);
+          }}
         >
           Editar
         </button>
