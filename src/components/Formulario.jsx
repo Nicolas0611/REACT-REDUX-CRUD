@@ -28,8 +28,6 @@ const Formulario = ({ cliente }) => {
   });
   const onSubmitView = (values) => {
     if (cliente?.nombre) {
-      console.log(cliente.id);
-      console.log(values);
       updateUsers(cliente.id, values);
     } else {
       createNewUser(values);
