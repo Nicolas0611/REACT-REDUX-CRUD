@@ -101,6 +101,7 @@ export const confirmState = (state) => {
     });
   };
 };
+
 export const deleteUserList = (users, id) => {
   return (dispatch) => {
     let arrayUsers = users.filter((user) => user.id !== id);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import Cliente from "../components/Cliente";
 import { useRestStore } from "../hooks/useRestStore";
 
@@ -9,8 +9,10 @@ const Inicio = () => {
   useEffect(() => {
     if (users.length === 0 || confirmation === true) {
       startGettingUsers();
-      confirmationGetter(false);
     }
+    return () => {
+      confirmationGetter(false);
+    };
   }, [confirmation]);
 
   return (

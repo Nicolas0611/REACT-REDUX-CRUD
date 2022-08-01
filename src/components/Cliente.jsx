@@ -5,7 +5,6 @@ import { useRestStore } from "../hooks/useRestStore";
 const Cliente = ({ id, nombre, email, telefono, empresa }) => {
   const navigate = useNavigate();
   const { startGettingUsersId, deleteUsers } = useRestStore();
-
   const onClickView = async (id) => {
     await startGettingUsersId(id);
     navigate(`/clientes/${id}`);

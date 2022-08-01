@@ -1,5 +1,3 @@
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import { useRestStore } from "../hooks/useRestStore";
 import { useNavigate } from "react-router-dom";
 
@@ -11,6 +9,7 @@ const VerCliente = () => {
     clearUser();
     navigate(`/clientes`);
   };
+
   return Object.keys(singleUser).length === 0 ? (
     <p> No hay resultados </p>
   ) : (
