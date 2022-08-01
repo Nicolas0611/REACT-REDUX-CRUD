@@ -5,11 +5,13 @@ import {
   CLEAN_USERS,
   CONFIRM_STATE,
   DELETE_USER,
+  SEARCH_USER,
 } from "../types/restTypes";
+
+let users = [];
 
 export const getUsers = (type, id) => {
   return async (dispatch) => {
-    let users = [];
     let url = null;
     if (type === "get") {
       url = "https://api-generator.retool.com/guD0XI/data";
@@ -98,6 +100,16 @@ export const confirmState = (state) => {
     dispatch({
       type: CONFIRM_STATE,
       payload: state,
+    });
+  };
+};
+
+export const searchUsers = (user) => {
+  let filterUser = users.filter((data) => data.nombre === user);
+  return (dispatch) => {
+    dispatch({
+      type: SEARCH_USER,
+      payload: filterUser,
     });
   };
 };

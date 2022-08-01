@@ -4,3 +4,4 @@ export const GET_USERS_ID = "GET_USERS_ID";
 export const CLEAN_USERS = "CLEAN_USERS";
 export const CONFIRM_STATE = "CONFIRM_STATE";
 export const DELETE_USER = "DELETE_USER";
+export const SEARCH_USER = "SEARCH_USER";

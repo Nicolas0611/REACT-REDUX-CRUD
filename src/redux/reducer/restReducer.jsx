@@ -5,6 +5,7 @@ import {
   GET_USERS_ID,
   CONFIRM_STATE,
   DELETE_USER,
+  SEARCH_USER,
 } from "../types/restTypes";
 
 const initialState = {
@@ -42,6 +43,11 @@ export const restAPI = (state = initialState, action) => {
         confirmState: action.payload,
       };
     case DELETE_USER:
+      return {
+        ...state,
+        users: action.payload,
+      };
+    case SEARCH_USER:
       return {
         ...state,
         users: action.payload,
